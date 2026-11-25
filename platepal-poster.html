@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>PlatePal — J Bobby Anderson</title>
+<style>
+  @page { size: 1120px 1584px; margin: 0; }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #e6ebe4;
+    color: #1c2822;
+    font-family: Bahnschrift, "Segoe UI", "Trebuchet MS", sans-serif;
+  }
+  .poster {
+    width: 1120px;
+    height: 1584px;
+    margin: 0 auto;
+    background: #f4f6f2;
+    border: 12px solid #145c38;
+    padding: 22px 26px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow: hidden;
+  }
+
+  header {
+    display: grid;
+    grid-template-columns: 1.35fr 0.78fr;
+    gap: 18px;
+    min-height: 248px;
+  }
+  .kicker {
+    margin: 0 0 6px;
+    font-size: 13px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #1e7a46;
+    font-weight: 700;
+  }
+  h1 {
+    margin: 0;
+    font-size: 84px;
+    line-height: 0.88;
+    letter-spacing: -0.03em;
+    font-weight: 700;
+    color: #123f28;
+  }
+  .deck {
+    margin: 14px 0 0;
+    max-width: 560px;
+    font-size: 20px;
+    line-height: 1.35;
+    color: #24312a;
+  }
+  .author {
+    margin: 16px 0 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #123f28;
+  }
+  .author::before {
+    content: "";
+    width: 36px;
+    height: 4px;
+    background: #1e7a46;
+  }
+  .meta {
+    margin: 8px 0 0 48px;
+    font-size: 14px;
+    color: #5c6b62;
+    letter-spacing: 0.02em;
+  }
+
+  .hero {
+    background: #145c38;
+    clip-path: polygon(14% 0, 100% 0, 100% 100%, 0 100%);
+    position: relative;
+  }
+  .hero svg { width: 100%; height: 100%; display: block; }
+
+  .strip {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #145c38;
+    color: #f4fbf7;
+    height: 38px;
+    padding: 0 18px;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .strip span { display: flex; align-items: center; gap: 8px; }
+  .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #b7e4c7;
+    display: inline-block;
+  }
+
+  .grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1.18fr 0.82fr;
+    grid-template-rows: 1.02fr 0.86fr 1.18fr 1.28fr 0.78fr;
+    gap: 12px;
+    min-height: 0;
+  }
+  .span2 { grid-column: 1 / -1; }
+
+  .card {
+    background: #fff;
+    border: 1.5px solid #cfe0d4;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+  .card h2 {
+    margin: 0;
+    background: #145c38;
+    color: #fff;
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    font-weight: 650;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-transform: uppercase;
+  }
+  .num {
+    background: #e7f6ee;
+    color: #145c38;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0;
+    border-radius: 4px;
+    padding: 2px 6px;
+    line-height: 1.2;
+  }
+  .body {
+    padding: 12px 14px 12px;
+    font-size: 14.5px;
+    line-height: 1.38;
+    color: #24312a;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .body p { margin: 0 0 8px; }
+  .body p:last-child { margin-bottom: 0; }
+
+  .chips {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .chip {
+    flex: 1;
+    background: #e7f6ee;
+    border-radius: 6px;
+    padding: 7px 8px 8px;
+  }
+  .chip b {
+    display: block;
+    font-size: 13px;
+    color: #145c38;
+    font-weight: 700;
+  }
+  .chip span {
+    display: block;
+    margin-top: 2px;
+    font-size: 12px;
+    color: #3d5246;
+    line-height: 1.25;
+  }
+
+  .nuts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: auto;
+    padding-top: 10px;
+  }
+  .nut {
+    border: 1.5px solid #1e7a46;
+    color: #145c38;
+    border-radius: 99px;
+    padding: 3px 9px;
+    font-size: 12.5px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
+    padding: 14px 12px 12px;
+    position: relative;
+    flex: 1;
+  }
+  .steps::before {
+    content: "";
+    position: absolute;
+    left: 40px;
+    right: 40px;
+    top: 27px;
+    height: 2px;
+    background: #b7d4c2;
+    z-index: 0;
+  }
+  .step { position: relative; z-index: 1; }
+  .bubble {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #1e7a46;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    display: grid;
+    place-items: center;
+    margin-bottom: 8px;
+  }
+  .step strong {
+    display: block;
+    font-size: 14px;
+    color: #123f28;
+    margin-bottom: 3px;
+  }
+  .step span {
+    display: block;
+    font-size: 12.5px;
+    line-height: 1.3;
+    color: #3d5246;
+  }
+
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .mini {
+    background: #f4f6f2;
+    border-radius: 8px;
+    padding: 8px 10px;
+  }
+  .mini b {
+    display: block;
+    color: #145c38;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+  .mini span { font-size: 13px; line-height: 1.35; color: #24312a; }
+  .rule {
+    margin-top: 8px;
+    border-left: 4px solid #1e7a46;
+    background: #e7f6ee;
+    padding: 7px 10px;
+    font-size: 13px;
+    line-height: 1.35;
+    color: #143f28;
+  }
+
+  .sources { list-style: none; margin: 0; padding: 0; }
+  .sources li {
+    display: grid;
+    grid-template-columns: 92px 1fr;
+    gap: 8px;
+    padding: 5px 0;
+    border-bottom: 1px solid #e3eee6;
+    font-size: 13.5px;
+    line-height: 1.3;
+  }
+  .sources li:last-child { border-bottom: 0; }
+  .sources b { color: #145c38; font-size: 12.5px; letter-spacing: 0.04em; text-transform: uppercase; padding-top: 1px; }
+  .note {
+    margin-top: 8px;
+    font-size: 12.5px;
+    line-height: 1.35;
+    color: #3d5246;
+  }
+
+  .day {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 12px;
+    align-items: start;
+  }
+  .bars { display: flex; flex-direction: column; gap: 6px; }
+  .bar-row { display: grid; grid-template-columns: 62px 1fr 36px; gap: 6px; align-items: center; font-size: 12px; }
+  .track { height: 10px; background: #e3eee6; border-radius: 99px; overflow: hidden; }
+  .fill { height: 100%; background: #1e7a46; border-radius: 99px; }
+  .fill.soft { background: repeating-linear-gradient(-45deg, #1e7a46, #1e7a46 3px, #8fbfa4 3px, #8fbfa4 6px); }
+  .pct { text-align: right; font-weight: 700; color: #145c38; }
+  .caption { margin-top: 6px; font-size: 11.5px; color: #5c6b62; }
+
+  .msg {
+    background: #f4f6f2;
+    border-radius: 10px 10px 10px 3px;
+    padding: 10px 12px;
+    font-size: 13.5px;
+    line-height: 1.38;
+  }
+  .msg p { margin: 0 0 6px; }
+  .msg .tag {
+    display: inline-block;
+    margin-top: 2px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #145c38;
+  }
+
+  .feats {
+    list-style: none;
+    margin: 0;
+    padding: 10px 12px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 7px 12px;
+  }
+  .feats li {
+    display: grid;
+    grid-template-columns: 22px 1fr;
+    gap: 6px;
+    align-items: start;
+  }
+  .feats svg { margin-top: 1px; }
+  .feats strong { display: block; font-size: 13px; color: #123f28; }
+  .feats span { display: block; font-size: 12px; line-height: 1.28; color: #3d5246; }
+
+  .goalrow {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 0.9fr 0.9fr 1.2fr;
+    gap: 10px;
+    padding: 10px 12px 12px;
+    min-height: 0;
+  }
+  .goal, .build {
+    border-radius: 8px;
+    background: #f4f6f2;
+    padding: 8px 10px;
+  }
+  .goal .big {
+    font-size: 28px;
+    font-weight: 700;
+    color: #145c38;
+    line-height: 1;
+  }
+  .goal h3 { margin: 2px 0 4px; font-size: 14px; color: #123f28; }
+  .goal p, .build li { margin: 0; font-size: 12.5px; line-height: 1.3; color: #3d5246; }
+  .build ol { margin: 6px 0 0; padding-left: 18px; }
+  .build li { margin: 2px 0; }
+  .build h3 { margin: 0; font-size: 14px; color: #123f28; }
+
+  footer {
+    background: #145c38;
+    color: #f4fbf7;
+    border-radius: 8px;
+    min-height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 16px;
+    gap: 16px;
+    font-size: 14.5px;
+  }
+  footer strong { font-weight: 650; }
+  footer .side {
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #b7e4c7;
+    white-space: nowrap;
+  }
+</style>
+</head>
+<body>
+<article class="poster">
+  <header>
+    <div>
+      <p class="kicker">Software project · SDG 2 · SDG 3</p>
+      <h1>PlatePal</h1>
+      <p class="deck">A chat assistant that reads a meal photo, names the nutrient gap, and points to a cheap local fix.</p>
+      <p class="author">J Bobby Anderson</p>
+      <p class="meta">Telegram bot · separate nutrient engine · Indian recipe tables</p>
+    </div>
+    <div class="hero" aria-hidden="true">
+      <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="198" cy="142" r="86" fill="none" stroke="#d7efe0" stroke-width="8"/>
+        <circle cx="198" cy="142" r="68" fill="#0f4f30" stroke="#9ddbb4" stroke-width="2"/>
+        <ellipse cx="176" cy="124" rx="30" ry="14" fill="#f7fbf8"/>
+        <ellipse cx="220" cy="138" rx="28" ry="13" fill="#d7efe0"/>
+        <ellipse cx="184" cy="158" rx="32" ry="14" fill="#ffffff"/>
+        <path d="M300 156h64a8 8 0 0 1 8 8v10a24 18 0 0 1-24 18h-32a24 18 0 0 1-24-18v-10a8 8 0 0 1 8-8z" fill="#e7f3c8"/>
+        <ellipse cx="332" cy="166" rx="28" ry="9" fill="#6f9338"/>
+        <rect x="36" y="28" width="132" height="64" rx="10" fill="#f4fbf7"/>
+        <path d="M52 92h18l-10 12z" fill="#f4fbf7"/>
+        <rect x="50" y="44" width="78" height="6" rx="3" fill="#1e7a46"/>
+        <rect x="50" y="56" width="100" height="5" rx="2.5" fill="#8fbfa4"/>
+        <rect x="50" y="68" width="62" height="5" rx="2.5" fill="#8fbfa4"/>
+        <path d="M332 40c-11 0-20 8-20 19 0 15 20 34 20 34s20-19 20-34c0-11-9-19-20-19z" fill="#f4fbf7"/>
+        <circle cx="332" cy="58" r="6" fill="#145c38"/>
+      </svg>
+    </div>
+  </header>
+
+  <div class="strip">
+    <span><i class="dot"></i> Photo</span>
+    <span><i class="dot"></i> Confirm the plate</span>
+    <span><i class="dot"></i> Food-table nutrients</span>
+    <span><i class="dot"></i> Gap against your need</span>
+    <span><i class="dot"></i> Shop near your pin</span>
+  </div>
+
+  <div class="grid">
+    <section class="card">
+      <h2><span class="num">01</span> Overview</h2>
+      <div class="body">
+        <p>PlatePal is a chat assistant for everyday Indian meals. A person sends a photo of the plate and, if they want a shop, a location pin. The bot names the dishes, waits for a correction, then compares that meal with their daily need.</p>
+        <p>The reply is a short gap, up to three low-cost foods, and a map link. It is an estimate from a photo and a recipe table, not a diagnosis.</p>
+        <div class="chips">
+          <div class="chip"><b>In</b><span>Meal photo and a map pin</span></div>
+          <div class="chip"><b>Check</b><span>You confirm the dishes first</span></div>
+          <div class="chip"><b>Out</b><span>Gap, cheap foods, a nearby shop</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2><span class="num">02</span> The gap</h2>
+      <div class="body">
+        <p>A full plate can still be short on iron, protein, calcium, folate, or B12. Calorie apps are built around Western dishes and stop at the number. They do not use Indian home recipes, and they do not say which shop is close.</p>
+        <p>PlatePal starts at that next step: name the shortfall, then name a food you can buy nearby.</p>
+        <div class="nuts">
+          <span class="nut">Iron</span>
+          <span class="nut">Protein</span>
+          <span class="nut">Calcium</span>
+          <span class="nut">Folate</span>
+          <span class="nut">B12</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="card span2">
+      <h2><span class="num">03</span> From photo to reply</h2>
+      <div class="steps">
+        <div class="step"><div class="bubble">1</div><strong>Photo</strong><span>The meal arrives in a Telegram chat.</span></div>
+        <div class="step"><div class="bubble">2</div><strong>Name</strong><span>A vision model returns dishes and a rough portion, as JSON.</span></div>
+        <div class="step"><div class="bubble">3</div><strong>Confirm</strong><span>“3 idli + 1 cup sambar?” Yes, or edit.</span></div>
+        <div class="step"><div class="bubble">4</div><strong>Match</strong><span>Confirmed names map onto Indian recipe rows.</span></div>
+        <div class="step"><div class="bubble">5</div><strong>Compare</strong><span>The sum is set against that person’s RDA.</span></div>
+        <div class="step"><div class="bubble">6</div><strong>Direct</strong><span>Gap, three foods under ₹30, and a shop link.</span></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2><span class="num">04</span> Two programs</h2>
+      <div class="body">
+        <div class="split">
+          <div class="mini">
+            <b>Bot</b>
+            <span>A thin relay. It downloads the photo, calls the engine, and formats the reply. No nutrition logic lives here.</span>
+          </div>
+          <div class="mini">
+            <b>Engine</b>
+            <span>A separate API. It holds the vision key, matches dishes, sums nutrients, and ranks foods by the gap.</span>
+          </div>
+        </div>
+        <div class="rule">The vision model is asked only for dish names and a rough portion. Iron, protein, and the rest come from the food table, so a number can be traced to a row.</div>
+        <p class="note">Telegram is the build channel: it is free and accepts photos, pins, and buttons. The same engine can sit behind WhatsApp later. Stack for the prototype: Python, FastAPI, SQLite.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2><span class="num">05</span> The numbers</h2>
+      <div class="body">
+        <ul class="sources">
+          <li><b>Dishes</b><span>Indian Nutrient Databank, cooked recipes</span></li>
+          <li><b>Raw foods</b><span>IFCT 2017, ICMR–NIN</span></li>
+          <li><b>Targets</b><span>ICMR–NIN RDA 2020, by age, sex, and weight</span></li>
+          <li><b>B12</b><span>A second food table. Marked lower confidence.</span></li>
+          <li><b>Shops</b><span>The user’s pin, to a market or kirana</span></li>
+        </ul>
+        <p class="note">Tamil home dishes missing from the databank — pongal, poriyal, kootu, kuzhambu, keerai — are added from their ingredients. A photo cannot see the exact portion, so nothing is counted until the person confirms.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2><span class="num">06</span> What a reply shows</h2>
+      <div class="body">
+        <div class="day">
+          <div>
+            <div class="bars">
+              <div class="bar-row"><span>Iron</span><div class="track"><div class="fill" style="width:58%"></div></div><span class="pct">58%</span></div>
+              <div class="bar-row"><span>Protein</span><div class="track"><div class="fill" style="width:91%"></div></div><span class="pct">91%</span></div>
+              <div class="bar-row"><span>Calcium</span><div class="track"><div class="fill" style="width:74%"></div></div><span class="pct">74%</span></div>
+              <div class="bar-row"><span>Folate</span><div class="track"><div class="fill" style="width:81%"></div></div><span class="pct">81%</span></div>
+              <div class="bar-row"><span>B12</span><div class="track"><div class="fill soft" style="width:45%"></div></div><span class="pct">45%</span></div>
+            </div>
+            <p class="caption">Example of one day’s graphic, not a study result. Hatched bar: lower confidence.</p>
+          </div>
+          <div class="msg">
+            <p><strong>Likely low in iron today.</strong></p>
+            <p>Under ₹30: amaranth leaves, a lemon, roasted chana.</p>
+            <p>Eat the leaves with the lemon. Vitamin C helps the iron.</p>
+            <p>Market link from your pin.</p>
+            <span class="tag">Estimate · not a diagnosis</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2><span class="num">07</span> What it does</h2>
+      <ul class="feats">
+        <li>
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#1e7a46" stroke-width="1.6"><circle cx="9" cy="9" r="7"/><path d="M5.5 9.2 l2.2 2.2 4.8-5"/></svg>
+          <div><strong>Confirm first</strong><span>The meal counts only after you accept the list.</span></div>
+        </li>
+        <li>
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#1e7a46" stroke-width="1.6"><rect x="3" y="3" width="12" height="12" rx="2"/><path d="M6 12 V8 M9 12 V6 M12 12 V9"/></svg>
+          <div><strong>Weekly score</strong><span>Iron, protein, calcium, folate, and B12.</span></div>
+        </li>
+        <li>
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#1e7a46" stroke-width="1.6"><ellipse cx="9" cy="5" rx="5.2" ry="2.1"/><path d="M3.8 5 v3.2 c0 1.2 2.3 2.2 5.2 2.2 s5.2-1 5.2-2.2 V5"/><path d="M3.8 8.4 v3.1 c0 1.2 2.3 2.2 5.2 2.2 s5.2-1 5.2-2.2 v-3.1"/></svg>
+          <div><strong>Under ₹30</strong><span>Three foods by missing nutrient per rupee.</span></div>
+        </li>
+        <li>
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#1e7a46" stroke-width="1.6"><path d="M9 2.5 C9 2.5 4 7.2 4 10.2 a5 5 0 0 0 10 0 C14 7.2 9 2.5 9 2.5z"/></svg>
+          <div><strong>Nearest shop</strong><span>A pin returns a market or kirana.</span></div>
+        </li>
+        <li>
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#1e7a46" stroke-width="1.6"><circle cx="7" cy="10" r="4"/><path d="M7 6.2 V13.8 M3.2 10 H10.8"/><path d="M12 4.5 c2.2.4 3.2 2 2.6 4.2"/></svg>
+          <div><strong>Iron pairing</strong><span>Suggests vitamin C with iron-rich food.</span></div>
+        </li>
+        <li>
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#1e7a46" stroke-width="1.6"><rect x="4" y="3" width="7" height="12" rx="1.5"/><path d="M12 7 h2.5 v6 H12"/></svg>
+          <div><strong>Tamil and voice</strong><span>Typed meals, or a voice note.</span></div>
+        </li>
+        <li>
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#1e7a46" stroke-width="1.6"><circle cx="6" cy="6" r="2"/><circle cx="12.2" cy="6.4" r="1.7"/><path d="M2.6 14.2c.4-2.5 1.7-3.6 3.5-3.6s3.1 1.1 3.4 3.6"/><path d="M9.6 14.2c.3-2.1 1.3-3 2.7-3s2.3.9 2.6 3"/></svg>
+          <div><strong>Family pot</strong><span>One meal, split across several people.</span></div>
+        </li>
+        <li>
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#1e7a46" stroke-width="1.6"><path d="M4 5 h10 M4 9 h10 M4 13 h6"/></svg>
+          <div><strong>Report on request</strong><span>A summary only when the user asks.</span></div>
+        </li>
+      </ul>
+    </section>
+
+    <section class="card span2">
+      <h2><span class="num">08</span> Goals and build order</h2>
+      <div class="goalrow">
+        <div class="goal">
+          <div class="big">2</div>
+          <h3>Zero Hunger</h3>
+          <p>Turns a thin plate into a short list of cheap foods, instead of a generic calorie total.</p>
+        </div>
+        <div class="goal">
+          <div class="big">3</div>
+          <h3>Good Health</h3>
+          <p>Shows a likely daily shortfall in plain language, and says when the figure is only an estimate.</p>
+        </div>
+        <div class="build">
+          <h3>Build order</h3>
+          <ol>
+            <li>Nutrient engine on typed dish names.</li>
+            <li>Telegram logging, still text only.</li>
+            <li>Photo recognition, with confirm before counting.</li>
+            <li>Location pin and nearby shops.</li>
+            <li>Daily and weekly gap tracking.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div><strong>The model names the dish. The food table supplies the number. You confirm the plate before it counts.</strong></div>
+    <div class="side">PlatePal · J Bobby Anderson</div>
+  </footer>
+</article>
+</body>
+</html>
